@@ -41,11 +41,19 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: RecipeCard(
-          title: "title",
-          rating: "rating",
-          cookTime: "cookTime",
-          thumbnailUrl: "thumbnailUrl"),
+      body: isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: _recipes.length,
+              itemBuilder: (context, index) {
+                return RecipeCard(
+                    title: _recipes[index].name,
+                    rating: _recipes[index].rating.toString(),
+                    cookTime: _recipes[index].totalTime,
+                    thumbnailUrl: _recipes[index].images);
+              }),
     );
   }
 }
