@@ -52,7 +52,8 @@ class _HomePageState extends State<HomePage> {
                     title: _recipes[index].name,
                     rating: _recipes[index].rating.toString(),
                     cookTime: _recipes[index].totalTime,
-                    thumbnailUrl: _recipes[index].images);
+                    thumbnailUrl: _recipes[index].images,
+                    preparationSteps: _recipes[index].preparationSteps);
               }),
     );
   }

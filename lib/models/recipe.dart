@@ -1,6 +1,7 @@
 class Recipe {
   final String name, images, totalTime;
   final double rating;
+  final List preparationSteps;
 
   // constructor
   Recipe({
@@ -8,6 +9,7 @@ class Recipe {
     this.images,
     this.rating,
     this.totalTime,
+    this.preparationSteps,
   });
 
   factory Recipe.fromJson(dynamic json) {
@@ -16,6 +18,7 @@ class Recipe {
       images: json["images"][0]["hostedLargeUrl"] as String,
       rating: json["rating"] as double,
       totalTime: json["totalTime"] as String,
+      preparationSteps: json["preparationSteps"] as List,
     );
   }
 
@@ -27,6 +30,6 @@ class Recipe {
 
   @override
   String toString() {
-    return "Recipe {\nname: $name, \nimage: $images, \nrating: $rating, \ntotalTime: $totalTime}";
+    return "Recipe {\nname: $name, \nimage: $images, \nrating: $rating, \ntotalTime: $totalTime, \npreparationSteps: $preparationSteps}";
   }
 }

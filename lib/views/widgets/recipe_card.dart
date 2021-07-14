@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe/views/widgets/recipe_modal.dart';
 
 class RecipeCard extends StatelessWidget {
   final String title, rating, cookTime, thumbnailUrl;
+  final List preparationSteps;
 
   // constructor
   RecipeCard({
@@ -9,6 +11,7 @@ class RecipeCard extends StatelessWidget {
     @required this.rating,
     @required this.cookTime,
     @required this.thumbnailUrl,
+    this.preparationSteps,
   });
 
   @override
@@ -32,59 +35,61 @@ class RecipeCard extends StatelessWidget {
           )
         ],
         image: DecorationImage(
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.35), 
-            BlendMode.multiply
-          ),
-          image: NetworkImage(thumbnailUrl),
-          fit: BoxFit.cover
-        ),
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.35), BlendMode.multiply),
+            image: NetworkImage(thumbnailUrl),
+            fit: BoxFit.cover),
       ),
-      child: Stack(
-        children: [
-          Align(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 19,
+      child: InkWell(
+        child: Stack(
+          children: [
+            Align(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.0),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 19,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
                 ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                textAlign: TextAlign.center,
               ),
+              alignment: Alignment.center,
             ),
-            alignment: Alignment.center,
-          ),
-          Align(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.schedule,
-                        color: Colors.yellow,
-                        size: 18,
-                      ),
-                      SizedBox(width: 7),
-                      Text(cookTime)
-                    ],
-                  ),
-                )
-              ],
-            ),
-            alignment: Alignment.bottomLeft,
-          )
-        ],
+            Align(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.schedule,
+                          color: Colors.yellow,
+                          size: 18,
+                        ),
+                        SizedBox(width: 7),
+                        Text(cookTime)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              alignment: Alignment.bottomLeft,
+            )
+          ],
+        ),
+        onTap: () {
+          RecipeModal(preparationSteps: preparationSteps);
+        },
       ),
     );
   }
